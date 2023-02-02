@@ -1,0 +1,45 @@
+* {
+    color: white;
+}
+
+#LogOut {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    margin-top: -10px;
+    border: 1px solid white;
+    color: white;
+}
+
+#RoomCinema {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+#BookSeats {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#screen {
+    border: 1px solid white;
+    width: 800px;
+    text-align: center;
+    background-color: whitesmoke;
+    color: black;
+
+}
+
+#NameUser {
+    color: white;
+    margin: 10px;
+}
+
+#row {
+    color: #ef4e7b;
+    padding-left: 10px;
+}
