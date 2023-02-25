@@ -1,8 +1,3 @@
-* {
-    background-color: #1D1F20;
-    color: none
-}
-
 #LogOut {
     position: absolute;
     top: 20px;
@@ -12,13 +7,14 @@
     color: white;
 }
 
-#RoomCinema {
+/* #RoomCinema {
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px;
-}
+    background-color: #ef4e7b;
+} */
 
 #BookSeats {
     padding: 10px;
@@ -45,6 +41,7 @@
     padding-left: 10px;
 }
 
-.customSelect {
-    background-color: #1D1F20;
+.reserved {
+    background-color: #ef4e7b !important;
+    color: red;
 }

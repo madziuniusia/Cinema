@@ -1,0 +1,16 @@
+#LogOut {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    margin-top: -10px;
+    border: 1px solid white;
+    color: white;
+}
+
+#NameUser {
+    color: white;
+}
+
+label {
+    color: white;
+}

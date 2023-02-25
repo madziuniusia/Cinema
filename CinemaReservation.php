@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl-PL">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/form.css">
-    <link rel="stylesheet" href="style/cinema.css">
+    <!-- <link rel="stylesheet" href="style/cinema.css"> -->
+    <link rel="stylesheet" href="style/reservation.css">
     </script>
 </head>
 
@@ -21,14 +22,13 @@
     unset($_SESSION['error']);
     echo ' <div id="container">';
 
-    echo '<div id="NameUser">HI ' . $_SESSION['user'] . '!</div>';
+    echo '<div id="NameUser">HI ' . $_SESSION['user'] . '!</div>\n';
     echo '<a id="LogOut" href="LogOut.php">Log Out</a>';          
 
     ?>
-
-    <form action="Reservation.php" method="post" class='customSelect'>
+    <form action="Reservation.php" method="post">
         <label for="movie">Choose a movie:</label>
-        <select id="movie" name="movie" class='customSelect'>
+        <select id="movie" name="movie">
             <?php
             include("Connect.php");
                 $mysqli = new mysqli($host, $db_user, $db_password, $db_name);
@@ -37,15 +37,12 @@
                 
                 $rs = $mysqli->query("SELECT `IDRoom`,`data`, `time`, `name` FROM `room` INNER JOIN `movie` ON `room`.`IDMovie` = `movie`.`IDMovie`");
                     while($rec=$rs->fetch_array()){
-                        echo "<option class='customSelect' value='".$rec['IDRoom']."'>".$rec['name']." ".$rec['data']." ".$rec['time']."</option>";
+                        echo "<option value='".$rec['IDRoom']."'>".$rec['name']." ".$rec['data']." ".$rec['time']."</option>";
                     }
                 $rs->close(); 
             ?>
-            <!--   <option value="FreeAvatar">Avatar: The Way of Water (3h 12min)</option>
-            <option value="FreePussInBoots2">Puss in Boots: The Last Wish (1h 40min)</option>
-            <option value="FreeMomias">Momias (1h 28min)</option>
-            <option value="FreeM3GAN">M3GAN (1h 42min)</option> -->
         </select>
+        <button type="submit">Zarezerwuj</button>
     </form>
     </div>
 
