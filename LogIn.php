@@ -15,21 +15,25 @@ if ($connect->connect_errno != 0) {
     $password = $_POST['password'];
 
     $login = htmlentities($login, ENT_QUOTES, "UTF-8");
-    $password = htmlentities($password, ENT_QUOTES, "UTF-8");
 
-
-    if ($result = @$connect->query(sprintf(
-        "SELECT * FROM login WHERE login='%s' AND password='%s'",
-        mysqli_real_escape_string($connect, $login),
-        mysqli_real_escape_string($connect, $password)
-    ))) {
+    if ($result = @$connect->query(
+        sprintf(
+            "SELECT * FROM login WHERE login='%s'",
+            mysqli_real_escape_string($connect, $login)
+        )
+    )) {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $_SESSION['user'] = $row['Login'];
-            $_SESSION['LogIn'] = true;
-            $_SESSION['id'] = $row['IDlogin'];
-            $result->free_result();
-            header('Location: CinemaReservation.php');
+            if (password_verify($password, $row['Password'])) {
+                $_SESSION['user'] = $row['Login'];
+                $_SESSION['LogIn'] = true;
+                $_SESSION['id'] = $row['IDlogin'];
+                $result->free_result();
+                header('Location: CinemaReservation.php');
+            } else {
+                $_SESSION['error'] = true;
+                header('Location: index.php');
+            }
         } else {
             $_SESSION['error'] = true;
             header('Location: index.php');

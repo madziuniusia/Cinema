@@ -20,7 +20,7 @@ if (isset($_POST['email'])) {
     $password = $_POST['password'];
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     $name = $_POST['name'];
-    $surename = $_POST['surename'];
+    $surname = $_POST['surname'];
     $phoneNumber = $_POST['phoneNumber'];
 
 
@@ -41,7 +41,7 @@ if (isset($_POST['email'])) {
                 } else {
 
                     if ($connect->query(("INSERT INTO login(Login, Password) VALUES ('$login','$passwordHash')"))) {
-                        if ($connect->query(("INSERT INTO dane(Name, Surename, PhoneNumber, Email, IDlogin) VALUES ('$name','$surename','$phoneNumber','$email', (SELECT `login`.`IDlogin` FROM `login` ORDER BY `IDlogin` DESC LIMIT 1))"))) {
+                        if ($connect->query(("INSERT INTO dane(Name, surname, PhoneNumber, Email, IDlogin) VALUES ('$name','$surname','$phoneNumber','$email', (SELECT `login`.`IDlogin` FROM `login` ORDER BY `IDlogin` DESC LIMIT 1))"))) {
                             //'SELECT * FROM `login`, `dane` WHERE `login`.`IDlogin` = `dane`.`IDlogin`'
                             $_SESSION['correctInsert'] = true;
                             header('Location: index.php');
@@ -78,12 +78,12 @@ if (isset($_POST['email'])) {
                 <span class="focus-bg"></span>
             </label>
             <label for="inp" class="inp">
-                <input type="text" id="surename" name="surename" minlength="3" placeholder="&nbsp;">
-                <span class="label">SURENAME</span>
+                <input type="text" id="surname" name="surname" minlength="3" placeholder="&nbsp;">
+                <span class="label">SURNAME</span>
                 <span class="focus-bg"></span>
             </label>
             <label for="inp" class="inp">
-                <input type="text" id="phoneNumber" name="phoneNumber" minlength="9" placeholder="&nbsp;">
+                <input type="number" id="phoneNumber" name="phoneNumber" minlength="9" placeholder="&nbsp;">
                 <span class="label">PHONE NUMBER</span>
                 <span class="focus-bg"></span>
             </label>

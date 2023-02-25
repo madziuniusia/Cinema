@@ -1,5 +1,6 @@
 * {
-    color: white;
+    background-color: #1D1F20;
+    color: none
 }
 
 #LogOut {
@@ -42,4 +43,8 @@
 #row {
     color: #ef4e7b;
     padding-left: 10px;
+}
+
+.customSelect {
+    background-color: #1D1F20;
 }

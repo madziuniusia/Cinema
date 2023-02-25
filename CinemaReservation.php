@@ -19,28 +19,36 @@
     }
 
     unset($_SESSION['error']);
+    echo ' <div id="container">';
 
     echo '<div id="NameUser">HI ' . $_SESSION['user'] . '!</div>';
-    echo '<a id="LogOut" href="LogOut.php">Log Out</a>'
+    echo '<a id="LogOut" href="LogOut.php">Log Out</a>';          
+
     ?>
 
-    <table id="RoomCinema">
-        <form action="Reservation.php" method="post">
-            <div class="center">
-                <p id="screen">screen</p>
-            </div>
+    <form action="Reservation.php" method="post" class='customSelect'>
+        <label for="movie">Choose a movie:</label>
+        <select id="movie" name="movie" class='customSelect'>
             <?php
-            for ($i = 1; $i <= 15; $i++) {
-                echo '<tr>';
-                for ($j = 1; $j <= 20; $j++) {
-                    echo '<td><input type="checkbox" name="R' . $i . 'S' . $j . '">' . $j . '</input></td>';
-                }
-                echo '<td id="row"> ROW ' . $i . '</td></tr>';
-            }
+            include("Connect.php");
+                $mysqli = new mysqli($host, $db_user, $db_password, $db_name);
+                if($mysqli->connect_errno) die('Nie można połączyć się z serwerem');
+                $mysqli->query("set names utf8");
+                
+                $rs = $mysqli->query("SELECT `IDRoom`,`data`, `time`, `name` FROM `room` INNER JOIN `movie` ON `room`.`IDMovie` = `movie`.`IDMovie`");
+                    while($rec=$rs->fetch_array()){
+                        echo "<option class='customSelect' value='".$rec['IDRoom']."'>".$rec['name']." ".$rec['data']." ".$rec['time']."</option>";
+                    }
+                $rs->close(); 
             ?>
-            <div class="center"><button class="gradient-border" id="BookSeats" type="submit">BOOK</button></div>
-        </form>
-    </table>
+            <!--   <option value="FreeAvatar">Avatar: The Way of Water (3h 12min)</option>
+            <option value="FreePussInBoots2">Puss in Boots: The Last Wish (1h 40min)</option>
+            <option value="FreeMomias">Momias (1h 28min)</option>
+            <option value="FreeM3GAN">M3GAN (1h 42min)</option> -->
+        </select>
+    </form>
+    </div>
+
 </body>
 
 </html>
