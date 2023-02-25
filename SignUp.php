@@ -40,12 +40,12 @@ if (isset($_POST['email'])) {
                     $_SESSION['errorLogin'] = 'this.login already exists';
                 } else {
 
-                    if ($connect->query(("INSERT INTO login(Login, Password) VALUES ('$login','$passwordHash')"))) {
-                        if ($connect->query(("INSERT INTO dane(Name, surname, PhoneNumber, Email, IDlogin) VALUES ('$name','$surname','$phoneNumber','$email', (SELECT `login`.`IDlogin` FROM `login` ORDER BY `IDlogin` DESC LIMIT 1))"))) {
+                    if ($connect->query(("INSERT INTO `login`(`Login`, `Password`) VALUES ('$login','$passwordHash')"))) {
+                        //if ($connect->query(("INSERT INTO `dane`(`Name`, `surname`, `PhoneNumber`, `Email`, `IDlogin`) VALUES ('$name','$surname','$phoneNumber','$email', (SELECT `login`.`IDlogin` FROM `login` ORDER BY `IDlogin` DESC LIMIT 1))"))) {
                             //'SELECT * FROM `login`, `dane` WHERE `login`.`IDlogin` = `dane`.`IDlogin`'
                             $_SESSION['correctInsert'] = true;
                             header('Location: index.php');
-                        }
+                        //}
                     } else {
                         throw new Exception($connect->error);
                     }
